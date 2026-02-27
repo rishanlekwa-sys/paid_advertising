@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thriving Dentist — Funnel Infographic</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #0a1628;
+    font-family: 'DM Sans', sans-serif;
+    color: #ffffff;
+    min-height: 100vh;
+    padding: 48px 24px;
+  }
+
+  .page { max-width: 860px; margin: 0 auto; }
+
+  .header { text-align: center; margin-bottom: 52px; }
+
+  .eyebrow {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #00b4a0;
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 5vw, 44px);
+    font-weight: 900;
+    color: #ffffff;
+    line-height: 1.15;
+    margin-bottom: 10px;
+  }
+
+  h1 span { color: #f5c842; }
+
+  .sub { font-size: 14px; color: rgba(255,255,255,0.75); }
+
+  .section-label {
+    font-size: 10px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: #00b4a0;
+    font-weight: 600;
+    margin-bottom: 18px;
+  }
+
+  /* FUNNEL */
+  .funnel-section { margin-bottom: 44px; }
+  .funnel { display: flex; flex-direction: column; }
+
+  .funnel-step {
+    display: flex;
+    align-items: center;
+    position: relative;
+    margin-bottom: 14px;
+  }
+
+  .funnel-step:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    left: 27px;
+    bottom: -14px;
+    width: 2px;
+    height: 14px;
+    background: rgba(0,180,160,0.5);
+    z-index: 1;
+  }
+
+  .step-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    flex-shrink: 0;
+    border: 2px solid rgba(0,180,160,0.5);
+    background: #1e3d6e;
+    z-index: 2;
+    margin-right: 14px;
+  }
+
+  .step-body {
+    flex: 1;
+    background: #1e3d6e;
+    border: 1px solid rgba(0,180,160,0.35);
+    border-radius: 12px;
+    padding: 14px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .step-name {
+    font-size: 15px;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 4px;
+  }
+
+  .step-desc {
+    font-size: 12px;
+    color: rgba(255,255,255,0.8);
+  }
+
+  .step-numbers { text-align: right; flex-shrink: 0; }
+
+  .step-range {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: #ffffff;
+    white-space: nowrap;
+  }
+
+  .step-rate {
+    font-size: 11px;
+    color: rgba(255,255,255,0.7);
+    white-space: nowrap;
+  }
+
+  /* REVENUE */
+  .revenue-section { margin-bottom: 44px; }
+
+  .rev-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .rev-card {
+    background: #1e3d6e;
+    border: 1px solid rgba(0,180,160,0.35);
+    border-radius: 14px;
+    padding: 22px 20px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .rev-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: #00b4a0;
+  }
+
+  .rev-card.optimistic::before { background: #f5c842; }
+
+  .scenario {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.65);
+    margin-bottom: 10px;
+  }
+
+  .closes {
+    font-family: 'Playfair Display', serif;
+    font-size: 52px;
+    font-weight: 900;
+    color: #00b4a0;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .rev-card.optimistic .closes { color: #f5c842; }
+
+  .closes-label {
+    font-size: 12px;
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 16px;
+  }
+
+  .rev-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 7px 0;
+    border-top: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .rlabel { font-size: 12px; color: rgba(255,255,255,0.75); }
+  .rval { font-size: 14px; font-weight: 700; color: #ffffff; }
+
+  /* ROAS */
+  .roas-section { margin-bottom: 44px; }
+
+  .roas-bar-wrap {
+    background: #1e3d6e;
+    border: 1px solid rgba(0,180,160,0.35);
+    border-radius: 14px;
+    padding: 24px 22px;
+  }
+
+  .roas-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 16px;
+  }
+
+  .roas-label { font-size: 15px; color: #ffffff; font-weight: 600; margin-bottom: 4px; }
+  .roas-note { font-size: 12px; color: rgba(255,255,255,0.65); }
+  .roas-value { font-family: 'Playfair Display', serif; font-size: 46px; font-weight: 900; color: #f5c842; }
+
+  .bar-track {
+    height: 12px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 99px;
+    overflow: hidden;
+    margin-bottom: 10px;
+  }
+
+  .bar-fill {
+    height: 100%;
+    width: 100%;
+    border-radius: 99px;
+    background: linear-gradient(90deg, #00b4a0, #f5c842);
+  }
+
+  .bar-legend {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: rgba(255,255,255,0.65);
+  }
+
+  /* LEVERS */
+  .levers-section { margin-bottom: 44px; }
+
+  .levers-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+
+  .lever {
+    background: #1e3d6e;
+    border: 1px solid rgba(0,180,160,0.35);
+    border-radius: 12px;
+    padding: 16px 18px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+
+  .lever-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: #00b4a0;
+    margin-top: 5px;
+    flex-shrink: 0;
+  }
+
+  .lever-dot.gold { background: #f5c842; }
+
+  .lever-title { font-size: 13px; font-weight: 700; color: #ffffff; margin-bottom: 5px; }
+  .lever-body { font-size: 12px; color: rgba(255,255,255,0.8); line-height: 1.5; }
+
+  .footer {
+    text-align: center;
+    margin-top: 48px;
+    font-size: 11px;
+    color: rgba(255,255,255,0.3);
+    letter-spacing: 1px;
+  }
+
+  @media (max-width: 600px) {
+    .rev-cards, .levers-grid { grid-template-columns: 1fr; }
+    .step-body { flex-direction: column; align-items: flex-start; }
+    .step-numbers { text-align: left; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="header">
+    <div class="eyebrow">Thriving Dentist · 2026 Growth Plan</div>
+    <h1>Facebook Ads Funnel<br><span>Projected Performance</span></h1>
+    <div class="sub">$300/month ad spend &nbsp;·&nbsp; $1,647/month offer &nbsp;·&nbsp; 12-month commitment</div>
+  </div>
+
+  <div class="funnel-section">
+    <div class="section-label">The Funnel — Step by Step</div>
+    <div class="funnel">
+
+      <div class="funnel-step">
+        <div class="step-icon">📣</div>
+        <div class="step-body">
+          <div>
+            <div class="step-name">Facebook Paid Ads</div>
+            <div class="step-desc">$300/month targeting US dentists and practice owners</div>
+          </div>
+          <div class="step-numbers">
+            <div class="step-range">15K–20K</div>
+            <div class="step-rate">impressions / month</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="funnel-step">
+        <div class="step-icon">📋</div>
+        <div class="step-body">
+          <div>
+            <div class="step-name">Event Registrations</div>
+            <div class="step-desc">Based on $300/mo ad spend benchmarks from strategy doc</div>
+          </div>
+          <div class="step-numbers">
+            <div class="step-range">12–35</div>
+            <div class="step-rate">registrations / month</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="funnel-step">
+        <div class="step-icon">🎙️</div>
+        <div class="step-body">
+          <div>
+            <div class="step-name">Event Attendance</div>
+            <div class="step-desc">50–60% attendance rate (strategy doc benchmark)</div>
+          </div>
+          <div class="step-numbers">
+            <div class="step-range">7–20</div>
+            <div class="step-rate">attendees / event</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="funnel-step">
+        <div class="step-icon">📞</div>
+        <div class="step-body">
+          <div>
+            <div class="step-name">Strategy Calls Booked</div>
+            <div class="step-desc">20–30% of attendees book a call (strategy doc benchmark)</div>
+          </div>
+          <div class="step-numbers">
+            <div class="step-range">2–6</div>
+            <div class="step-rate">calls / month</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="funnel-step">
+        <div class="step-icon">✅</div>
+        <div class="step-body">
+          <div>
+            <div class="step-name">Closed Clients</div>
+            <div class="step-desc">30% close rate — confirmed CSM conversion rate</div>
+          </div>
+          <div class="step-numbers">
+            <div class="step-range">1–2</div>
+            <div class="step-rate">new clients / month</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+
+  <div class="roas-section">
+    <div class="section-label">Return on Ad Spend</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+
+      <!-- Conservative -->
+      <div style="background:#1e3d6e;border:1px solid rgba(0,180,160,0.35);border-radius:14px;overflow:hidden;position:relative;">
+        <div style="position:absolute;top:0;left:0;right:0;height:4px;background:#00b4a0;"></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;">
+          <div style="padding:20px 14px;border-right:1px solid rgba(255,255,255,0.08);">
+            <div style="font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-bottom:10px;">Monthly Ad Spend</div>
+            <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:900;color:#ffffff;margin-bottom:5px;">$300</div>
+            <div style="font-size:11px;color:rgba(255,255,255,0.6);">per month</div>
+          </div>
+          <div style="padding:20px 14px;border-right:1px solid rgba(255,255,255,0.08);text-align:center;">
+            <div style="font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-bottom:10px;">ROAS</div>
+            <div style="font-family:'Playfair Display',serif;font-size:30px;font-weight:900;color:#f5c842;line-height:1;margin-bottom:5px;">65×</div>
+            <div style="font-size:11px;color:rgba(255,255,255,0.6);">conservative</div>
+          </div>
+          <div style="padding:20px 14px;text-align:right;">
+            <div style="font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-bottom:10px;">Revenue</div>
+            <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:900;color:#ffffff;margin-bottom:5px;">$19,764</div>
+            <div style="font-size:11px;color:rgba(255,255,255,0.6);">1 close/month</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Optimistic -->
+      <div style="background:#1e3d6e;border:1px solid rgba(245,200,66,0.35);border-radius:14px;overflow:hidden;position:relative;">
+        <div style="position:absolute;top:0;left:0;right:0;height:4px;background:#f5c842;"></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;">
+          <div style="padding:20px 14px;border-right:1px solid rgba(255,255,255,0.08);">
+            <div style="font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-bottom:10px;">Monthly Ad Spend</div>
+            <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:900;color:#ffffff;margin-bottom:5px;">$300</div>
+            <div style="font-size:11px;color:rgba(255,255,255,0.6);">per month</div>
+          </div>
+          <div style="padding:20px 14px;border-right:1px solid rgba(255,255,255,0.08);text-align:center;">
+            <div style="font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-bottom:10px;">ROAS</div>
+            <div style="font-family:'Playfair Display',serif;font-size:30px;font-weight:900;color:#f5c842;line-height:1;margin-bottom:5px;">130×</div>
+            <div style="font-size:11px;color:rgba(255,255,255,0.6);">optimistic</div>
+          </div>
+          <div style="padding:20px 14px;text-align:right;">
+            <div style="font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-bottom:10px;">Revenue</div>
+            <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:900;color:#ffffff;margin-bottom:5px;">$39,528</div>
+            <div style="font-size:11px;color:rgba(255,255,255,0.6);">2 closes/month</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="levers-section">
+    <div class="section-label">Key Levers to Watch</div>
+    <div class="levers-grid">
+      <div class="lever">
+        <div class="lever-dot"></div>
+        <div>
+          <div class="lever-title">Strategy Call Bookings</div>
+          <div class="lever-body">Target 20–30% of attendees. Most direct lever on close volume.</div>
+        </div>
+      </div>
+      <div class="lever">
+        <div class="lever-dot"></div>
+        <div>
+          <div class="lever-title">Attendance Rate</div>
+          <div class="lever-body">Target 50–60%. More attendees means more calls and more closes.</div>
+        </div>
+      </div>
+      <div class="lever">
+        <div class="lever-dot gold"></div>
+        <div>
+          <div class="lever-title">CSM Close Rate</div>
+          <div class="lever-body">Currently 30%. Even a 5% gain compounds significantly at scale.</div>
+        </div>
+      </div>
+      <div class="lever">
+        <div class="lever-dot gold"></div>
+        <div>
+          <div class="lever-title">Cost Per Registration</div>
+          <div class="lever-body">Target under $15. Optimize monthly to keep the funnel efficient.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+</div>
+</body>
+</html>
