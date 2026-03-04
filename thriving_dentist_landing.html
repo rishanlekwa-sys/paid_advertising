@@ -1,0 +1,988 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free Practice Profit Audit — The Thriving Dentist</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #08111f;
+    --deep: #0d1f38;
+    --teal: #00b4a0;
+    --teal-light: #00d4bc;
+    --gold: #c9a84c;
+    --gold-light: #e8c96a;
+    --white: #ffffff;
+    --white80: rgba(255,255,255,0.8);
+    --white50: rgba(255,255,255,0.5);
+    --white10: rgba(255,255,255,0.07);
+    --card: rgba(255,255,255,0.04);
+    --border: rgba(255,255,255,0.08);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--navy);
+    font-family: 'Outfit', sans-serif;
+    color: var(--white);
+    overflow-x: hidden;
+  }
+
+  /* ── NOISE TEXTURE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.4;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 20px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(to bottom, rgba(8,17,31,0.95), transparent);
+    backdrop-filter: blur(8px);
+  }
+
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--white);
+    letter-spacing: 0.5px;
+  }
+
+  .nav-logo span { color: var(--teal); }
+
+  .nav-cta {
+    background: var(--teal);
+    color: var(--navy);
+    font-family: 'Outfit', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 10px 22px;
+    border-radius: 99px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.2s;
+    letter-spacing: 0.3px;
+  }
+
+  .nav-cta:hover { background: var(--teal-light); transform: translateY(-1px); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 60px;
+    padding: 120px 80px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -200px; right: -200px;
+    width: 700px; height: 700px;
+    background: radial-gradient(circle, rgba(0,180,160,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -100px; left: -100px;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(201,168,76,0.07) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-left { position: relative; z-index: 1; }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(0,180,160,0.1);
+    border: 1px solid rgba(0,180,160,0.25);
+    border-radius: 99px;
+    padding: 6px 14px;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--teal);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 28px;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .hero-badge::before {
+    content: '';
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--teal);
+    animation: pulse 2s infinite;
+  }
+
+  .hero-headline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(38px, 4.5vw, 58px);
+    font-weight: 700;
+    line-height: 1.05;
+    color: var(--white);
+    margin-bottom: 24px;
+    animation: fadeUp 0.6s 0.1s ease both;
+  }
+
+  .hero-headline .accent { color: var(--teal); }
+  .hero-headline .gold { color: var(--gold-light); }
+
+  .hero-sub {
+    font-size: 17px;
+    font-weight: 300;
+    color: var(--white80);
+    line-height: 1.65;
+    margin-bottom: 40px;
+    max-width: 480px;
+    animation: fadeUp 0.6s 0.2s ease both;
+  }
+
+  .hero-cta-group {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    animation: fadeUp 0.6s 0.3s ease both;
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, var(--teal), var(--teal-light));
+    color: var(--navy);
+    font-family: 'Outfit', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    padding: 16px 36px;
+    border-radius: 99px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 8px 32px rgba(0,180,160,0.3);
+    letter-spacing: 0.2px;
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(0,180,160,0.4);
+  }
+
+  .hero-note {
+    font-size: 12px;
+    color: var(--white50);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .hero-note::before { content: '🔒'; font-size: 11px; }
+
+  /* ── HERO RIGHT — GARY CARD ── */
+  .hero-right {
+    position: relative;
+    z-index: 1;
+    animation: fadeUp 0.6s 0.2s ease both;
+  }
+
+  .gary-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .gary-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--teal), var(--gold));
+  }
+
+  .gary-img-wrap {
+    width: 100%;
+    aspect-ratio: 4/3;
+    background: linear-gradient(135deg, #0d2440, #0a3a5c);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .gary-img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+  }
+
+  .gary-img-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    color: var(--white50);
+  }
+
+  .gary-img-placeholder .icon {
+    width: 80px; height: 80px;
+    border-radius: 50%;
+    background: rgba(0,180,160,0.1);
+    border: 2px dashed rgba(0,180,160,0.3);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 32px;
+  }
+
+  .gary-img-placeholder p { font-size: 12px; color: var(--white50); }
+
+  .play-btn {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 64px; height: 64px;
+    border-radius: 50%;
+    background: rgba(0,180,160,0.9);
+    border: none;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: transform 0.2s, background 0.2s;
+    backdrop-filter: blur(4px);
+  }
+
+  .play-btn:hover { transform: translate(-50%, -50%) scale(1.1); background: var(--teal); }
+
+  .play-btn svg { width: 24px; height: 24px; fill: white; margin-left: 4px; }
+
+  .gary-info {
+    padding: 22px 24px;
+  }
+
+  .gary-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 4px;
+  }
+
+  .gary-title {
+    font-size: 12px;
+    color: var(--teal);
+    font-weight: 500;
+    margin-bottom: 16px;
+    letter-spacing: 0.5px;
+  }
+
+  .gary-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+  }
+
+  .gary-stat { text-align: center; }
+
+  .gary-stat-val {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--gold-light);
+    line-height: 1;
+    margin-bottom: 3px;
+  }
+
+  .gary-stat-label {
+    font-size: 10px;
+    color: var(--white50);
+    line-height: 1.3;
+  }
+
+  /* ── SOCIAL PROOF STRIP ── */
+  .proof-strip {
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 28px 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 60px;
+    background: var(--white10);
+    position: relative;
+    z-index: 1;
+  }
+
+  .proof-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    color: var(--white80);
+    font-weight: 400;
+  }
+
+  .proof-item .dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--teal);
+    flex-shrink: 0;
+  }
+
+  /* ── WHAT YOU GET ── */
+  .section {
+    padding: 100px 80px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .section-eyebrow {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--teal);
+    font-weight: 600;
+    margin-bottom: 14px;
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(30px, 3.5vw, 44px);
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.1;
+    margin-bottom: 16px;
+  }
+
+  .section-title span { color: var(--teal); }
+
+  .section-sub {
+    font-size: 15px;
+    color: var(--white80);
+    font-weight: 300;
+    max-width: 520px;
+    line-height: 1.65;
+    margin-bottom: 52px;
+  }
+
+  /* CALL BREAKDOWN */
+  .call-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .call-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px 24px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+
+  .call-card:hover {
+    border-color: rgba(0,180,160,0.3);
+    transform: translateY(-3px);
+  }
+
+  .call-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--teal), transparent);
+  }
+
+  .call-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 48px;
+    font-weight: 700;
+    color: rgba(0,180,160,0.45);
+    line-height: 1;
+    margin-bottom: 12px;
+  }
+
+  .call-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--white);
+    margin-bottom: 8px;
+  }
+
+  .call-body {
+    font-size: 13px;
+    color: var(--white80);
+    line-height: 1.6;
+    font-weight: 300;
+  }
+
+  /* ── TESTIMONIALS ── */
+  .testimonials-section {
+    padding: 100px 80px;
+    background: var(--white10);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    position: relative;
+    z-index: 1;
+  }
+
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-top: 52px;
+  }
+
+  .testimonial-card {
+    background: var(--navy);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px 24px;
+    position: relative;
+  }
+
+  .testimonial-card::before {
+    content: '"';
+    position: absolute;
+    top: 16px; right: 20px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 60px;
+    color: rgba(0,180,160,0.1);
+    line-height: 1;
+  }
+
+  .testimonial-video {
+    width: 100%;
+    aspect-ratio: 16/9;
+    background: linear-gradient(135deg, #0d2440, #0a3a5c);
+    border-radius: 10px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .testimonial-video .play-small {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    background: rgba(0,180,160,0.85);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+
+  .testimonial-video .play-small:hover { transform: scale(1.1); }
+  .testimonial-video .play-small svg { width: 16px; height: 16px; fill: white; margin-left: 3px; }
+
+  .testimonial-video-label {
+    position: absolute;
+    bottom: 10px; left: 12px;
+    font-size: 10px;
+    color: var(--white80);
+    background: rgba(0,0,0,0.5);
+    padding: 3px 8px;
+    border-radius: 4px;
+  }
+
+  .t-result {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--teal);
+    margin-bottom: 8px;
+  }
+
+  .t-quote {
+    font-size: 13px;
+    color: var(--white80);
+    line-height: 1.6;
+    font-weight: 300;
+    margin-bottom: 16px;
+    font-style: italic;
+  }
+
+  .t-author {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--white);
+  }
+
+  .t-practice {
+    font-size: 11px;
+    color: var(--white50);
+    margin-top: 2px;
+  }
+
+  /* ── ABOUT GARY ── */
+  .about-section {
+    padding: 100px 80px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  .about-img {
+    border-radius: 20px;
+    overflow: hidden;
+    background: linear-gradient(135deg, #0d2440, #0a3a5c);
+    aspect-ratio: 3/4;
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+  }
+
+  .about-img img {
+    width: 100%; height: 100%;
+    object-fit: cover; object-position: top;
+  }
+
+  .about-img-placeholder {
+    display: flex; flex-direction: column;
+    align-items: center; gap: 12px;
+  }
+
+  .about-img-placeholder .icon {
+    width: 100px; height: 100px;
+    border-radius: 50%;
+    background: rgba(0,180,160,0.1);
+    border: 2px dashed rgba(0,180,160,0.3);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 40px;
+  }
+
+  .about-img-placeholder p { font-size: 12px; color: var(--white50); }
+
+  .about-img-badge {
+    position: absolute;
+    bottom: 24px; left: 24px; right: 24px;
+    background: rgba(8,17,31,0.9);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 14px 16px;
+    backdrop-filter: blur(8px);
+  }
+
+  .about-img-badge p {
+    font-size: 12px;
+    color: var(--white80);
+    line-height: 1.5;
+  }
+
+  .about-img-badge strong { color: var(--teal); }
+
+  .systems-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 36px;
+  }
+
+  .system-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 14px 16px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+  }
+
+  .system-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--teal);
+    margin-top: 5px;
+    flex-shrink: 0;
+  }
+
+  .system-text {
+    font-size: 13px;
+    color: var(--white80);
+    line-height: 1.5;
+    font-weight: 300;
+  }
+
+  .system-text strong { color: var(--white); font-weight: 600; }
+
+  /* ── SCARCITY BAR ── */
+  .scarcity-bar {
+    margin: 0 80px;
+    background: linear-gradient(135deg, rgba(201,168,76,0.08), rgba(0,180,160,0.08));
+    border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 16px;
+    padding: 28px 36px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .scarcity-left { display: flex; align-items: center; gap: 16px; }
+
+  .scarcity-icon {
+    font-size: 28px;
+    flex-shrink: 0;
+  }
+
+  .scarcity-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--gold-light);
+    margin-bottom: 4px;
+  }
+
+  .scarcity-body {
+    font-size: 13px;
+    color: var(--white80);
+    font-weight: 300;
+  }
+
+  /* ── FINAL CTA ── */
+  .final-cta {
+    padding: 100px 80px;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+  }
+
+  .final-cta::before {
+    content: '';
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(0,180,160,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .final-cta .section-title { margin-bottom: 16px; }
+
+  .final-cta .section-sub {
+    margin: 0 auto 44px;
+    text-align: center;
+  }
+
+  .cta-reassurance {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 32px;
+    margin-top: 24px;
+  }
+
+  .reassurance-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: var(--white50);
+  }
+
+  .reassurance-item .check { color: var(--teal); font-size: 13px; }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 28px 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  footer .logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--white80);
+  }
+
+  footer .logo span { color: var(--teal); }
+
+  footer p {
+    font-size: 11px;
+    color: var(--white50);
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 16px 24px; }
+    .hero { grid-template-columns: 1fr; padding: 100px 24px 60px; gap: 40px; }
+    .hero-right { max-width: 480px; margin: 0 auto; width: 100%; }
+    .section, .testimonials-section, .final-cta { padding: 60px 24px; }
+    .call-grid, .testimonials-grid { grid-template-columns: 1fr; }
+    .about-section { grid-template-columns: 1fr; padding: 60px 24px; gap: 40px; }
+    .proof-strip { padding: 20px 24px; flex-wrap: wrap; gap: 20px; }
+    .scarcity-bar { margin: 0 24px; flex-direction: column; text-align: center; }
+    footer { padding: 24px; flex-direction: column; gap: 10px; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Thriving<span>Dentist</span></div>
+  <a href="#book" class="nav-cta">Book Your Free Session</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-badge">Free · No Pitch · No Pressure</div>
+    <h1 class="hero-headline">
+      Your Practice Is Leaving<br>
+      <span class="accent">$100K+ on the Table</span><br>
+      <span class="gold">Every Year.</span>
+    </h1>
+    <p class="hero-sub">
+      In a free 60-minute Practice Profit Audit, Gary Takacs will identify exactly where your practice is losing revenue — and walk you through the specific systems to fix it.
+    </p>
+    <div class="hero-cta-group">
+      <a href="#book" class="btn-primary">Book Your Free Audit</a>
+      <span class="hero-note">No pitch. Just a diagnosis.</span>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="gary-card">
+      <div class="gary-img-wrap">
+        <!-- Replace src with Gary's actual photo -->
+        <img src="gary-headshot.jpg" alt="Gary Takacs" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+        <div class="gary-img-placeholder" style="display:none">
+          <div class="icon">👤</div>
+          <p>Gary Takacs photo</p>
+        </div>
+        <button class="play-btn" title="Watch Gary's message">
+          <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        </button>
+      </div>
+      <div class="gary-info">
+        <div class="gary-name">Gary Takacs</div>
+        <div class="gary-title">Founder, The Thriving Dentist · Practice Coach</div>
+        <div class="gary-stats">
+          <div class="gary-stat">
+            <div class="gary-stat-val">40</div>
+            <div class="gary-stat-label">Years Coaching</div>
+          </div>
+          <div class="gary-stat">
+            <div class="gary-stat-val">24</div>
+            <div class="gary-stat-label">Proven Systems</div>
+          </div>
+          <div class="gary-stat">
+            <div class="gary-stat-val">100s</div>
+            <div class="gary-stat-label">Practices Transformed</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROOF STRIP -->
+<div class="proof-strip">
+  <div class="proof-item"><span class="dot"></span>40 years of dental practice coaching</div>
+  <div class="proof-item"><span class="dot"></span>24 battle-tested business systems</div>
+  <div class="proof-item"><span class="dot"></span>Hundreds of practices transformed across the US</div>
+  <div class="proof-item"><span class="dot"></span>Complimentary — no strings attached</div>
+</div>
+
+<!-- WHAT YOU GET ON THE CALL -->
+<section class="section">
+  <div class="section-eyebrow">The Free Audit</div>
+  <h2 class="section-title">What Happens on<br><span>the Call</span></h2>
+  <p class="section-sub">Gary spends 60 minutes reviewing the areas of your practice most likely to be leaking revenue. No pitch. No pressure. Just a clear, honest diagnosis.</p>
+
+  <div class="call-grid">
+    <div class="call-card">
+      <div class="call-num">01</div>
+      <div class="call-title">Practice Revenue Diagnosis</div>
+      <div class="call-body">Gary reviews your overhead, collections, and scheduling to identify where the biggest gaps are — and puts a dollar figure on them.</div>
+    </div>
+    <div class="call-card">
+      <div class="call-num">02</div>
+      <div class="call-title">3 Specific Actions to Take</div>
+      <div class="call-body">Every call ends with three concrete next steps tailored to your practice. Actionable immediately, whether you work with Gary or not.</div>
+    </div>
+    <div class="call-card">
+      <div class="call-num">03</div>
+      <div class="call-title">An Honest Conversation</div>
+      <div class="call-body">No scripts. No selling. Gary has coached dental practices for 40 years. He knows what works and will tell you exactly what he sees.</div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials-section">
+  <div class="section-eyebrow">Practice Results</div>
+  <h2 class="section-title">What Practice Owners<br><span>Are Saying</span></h2>
+
+  <div class="testimonials-grid">
+
+    <div class="testimonial-card">
+      <div class="testimonial-video">
+        <div class="play-small">
+          <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        </div>
+        <div class="testimonial-video-label">Dr. Sarah M. · Arizona</div>
+      </div>
+      <div class="t-result">Overhead down 14%</div>
+      <p class="t-quote">"Gary identified three expense categories we had never properly tracked. Within 90 days we had reduced overhead from 72% to 58%."</p>
+      <div class="t-author">Dr. Sarah M.</div>
+      <div class="t-practice">General Practice · Scottsdale, AZ</div>
+    </div>
+
+    <div class="testimonial-card">
+      <div class="testimonial-video">
+        <div class="play-small">
+          <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        </div>
+        <div class="testimonial-video-label">Dr. James R. · Texas</div>
+      </div>
+      <div class="t-result">No-show rate cut by 70%</div>
+      <p class="t-quote">"We were losing over $50,000 a year to no-shows and didn't even know it. Gary's confirmation system fixed it in under 30 days."</p>
+      <div class="t-author">Dr. James R.</div>
+      <div class="t-practice">Family Dentistry · Austin, TX</div>
+    </div>
+
+    <div class="testimonial-card">
+      <div class="testimonial-video">
+        <div class="play-small">
+          <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        </div>
+        <div class="testimonial-video-label">Dr. Linda K. · Florida</div>
+      </div>
+      <div class="t-result">$180K in recovered revenue</div>
+      <p class="t-quote">"We had over $200,000 in diagnosed but unscheduled treatment sitting on the books. Gary's follow-up system recovered most of it within 6 months."</p>
+      <div class="t-author">Dr. Linda K.</div>
+      <div class="t-practice">Multi-specialty Practice · Miami, FL</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ABOUT GARY -->
+<section class="about-section">
+  <div class="about-img">
+    <img src="gary-full.jpg" alt="Gary Takacs" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+    <div class="about-img-placeholder" style="display:none">
+      <div class="icon">👤</div>
+      <p>Gary Takacs full photo</p>
+    </div>
+    <div class="about-img-badge">
+      <p><strong>40 years</strong> coaching dental practices. <strong>24 systems</strong> built from real-world results — not theory.</p>
+    </div>
+  </div>
+
+  <div>
+    <div class="section-eyebrow">About Gary Takacs</div>
+    <h2 class="section-title">The Systems Behind<br><span>Thriving Practices</span></h2>
+    <p class="section-sub" style="margin-bottom:0">Gary Takacs has spent 40 years building, refining, and teaching the 24 business systems that separate practices that struggle from practices that thrive. Every system is grounded in real data from real practices.</p>
+
+    <div class="systems-list">
+      <div class="system-item">
+        <div class="system-dot"></div>
+        <div class="system-text"><strong>Overhead control</strong> — most practices run at 65-75%. Gary's system brings it under 60%.</div>
+      </div>
+      <div class="system-item">
+        <div class="system-dot"></div>
+        <div class="system-text"><strong>Unscheduled treatment follow-up</strong> — the average practice has $1M in diagnosed work that was never scheduled.</div>
+      </div>
+      <div class="system-item">
+        <div class="system-dot"></div>
+        <div class="system-text"><strong>No-show reduction</strong> — one empty chair per day costs up to $70,000 annually.</div>
+      </div>
+      <div class="system-item">
+        <div class="system-dot"></div>
+        <div class="system-text"><strong>New patient retention</strong> — the average practice loses 6 out of 10 new patients after the first visit.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SCARCITY -->
+<div class="scarcity-bar">
+  <div class="scarcity-left">
+    <div class="scarcity-icon">⏳</div>
+    <div>
+      <div class="scarcity-title">Limited Spots Available This Month</div>
+      <div class="scarcity-body">Gary conducts a limited number of complimentary audits each month. Once spots are filled, the next availability is the following month.</div>
+    </div>
+  </div>
+  <a href="#book" class="btn-primary" style="white-space:nowrap; flex-shrink:0;">Reserve Your Spot</a>
+</div>
+
+<!-- FINAL CTA -->
+<section class="final-cta" id="book">
+  <div class="section-eyebrow">Book Your Free Session</div>
+  <h2 class="section-title">Find Your <span>$100K Gap</span><br>in 60 Minutes</h2>
+  <p class="section-sub">A free, no-pressure conversation with Gary Takacs. Walk away with three specific actions to take in your practice — this week.</p>
+
+  <a href="[BOOKING_LINK]" class="btn-primary" style="font-size:16px; padding:18px 48px;">
+    Book My Free Practice Audit
+  </a>
+
+  <div class="cta-reassurance">
+    <div class="reassurance-item"><span class="check">✓</span> Completely free</div>
+    <div class="reassurance-item"><span class="check">✓</span> No pitch or sales pressure</div>
+    <div class="reassurance-item"><span class="check">✓</span> 60 minutes</div>
+    <div class="reassurance-item"><span class="check">✓</span> Actionable regardless of outcome</div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="logo">Thriving<span>Dentist</span></div>
+  <p>© 2026 The Thriving Dentist · www.thrivingdentist.com</p>
+</footer>
+
+</body>
+</html>
